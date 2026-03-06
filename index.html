@@ -11,7 +11,6 @@
       <section class="card">
         <p class="eyebrow">Pomodoro Timer</p>
         <h1>Stay focused</h1>
-        <p class="subtitle">A simple focus timer built with HTML, CSS, and JavaScript.</p>
 
         <div class="mode-switch">
           <button id="work-btn" class="mode-btn active">Work</button>
@@ -24,18 +23,6 @@
             <label for="custom-minutes">Custom minutes</label>
             <input id="custom-minutes" type="number" min="1" max="180" />
             <button id="set-custom-btn">Set</button>
-        </div>
-
-        <div class="custom-time">
-          <label for="custom-minutes">Custom minutes</label>
-          <input
-            id="custom-minutes"
-            type="number"
-            min="1"
-            max="180"
-            placeholder="Enter minutes"
-          />
-          <button id="set-custom-btn">Set</button>
         </div>
 
         <div class="timer" id="timer">25:00</div>
@@ -52,6 +39,20 @@
         </div>
       </section>
 
+      <aside class = "card task">
+        <p class = "eyebrow">Task List</p>
+        <h2> Current task</h2>
+
+        <div class = "task-input">
+            <input id = "task-input" type = "text" placeholder = "Enter your task " />
+            <button id = "add-task-btn">Add</button>
+        </div>
+
+        <ul id = "task-list"></ul>
+      </aside>
+    </main>
+      
+      
       <section class="about">
         <h2>About this project</h2>
         <p>

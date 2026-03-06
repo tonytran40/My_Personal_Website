@@ -11,20 +11,26 @@ body {
 }
 
 .app {
-  width: min(92%, 720px);
+  width: min(1100px, 100%);
   margin: 40px auto;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  flex-wrap: wrap;
 }
 
 .card,
+.tasks-card,
 .about {
   background: #ffffff;
   border-radius: 16px;
   padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
 }
 
 .about {
-  margin-top: 20px;
+  width: 100%;
 }
 
 .eyebrow {
@@ -35,23 +41,14 @@ body {
   letter-spacing: 1px;
 }
 
-h1,
-h2 {
-  margin-top: 0;
-}
-
-.subtitle,
-.status {
-  color: #4b5563;
-}
-
 .mode-switch,
 .time-options,
 .custom-time,
-.controls {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.controls,
+#task-input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
 }
 
 .mode-switch,
@@ -63,18 +60,17 @@ h2 {
 .mode-btn,
 .time-btn,
 #set-custom-btn,
-.controls button {
+.controls button,
+#add-task-btn {
   border: none;
   border-radius: 10px;
   padding: 10px 16px;
   cursor: pointer;
-  font-size: 1rem;
 }
 
 .mode-btn,
 .time-btn {
   background: #e5e7eb;
-  color: #111827;
 }
 
 .mode-btn.active,
@@ -83,25 +79,10 @@ h2 {
   color: white;
 }
 
-#custom-minutes {
-  padding: 10px;
-  border: 1px solid #d1d5db;
-  border-radius: 10px;
-  width: 150px;
-  font-size: 1rem;
-}
-
-.custom-time label {
-  display: flex;
-  align-items: center;
-  font-weight: bold;
-}
-
 .timer {
-  font-size: 4rem;
-  font-weight: bold;
-  text-align: center;
-  margin: 24px 0 12px;
+  font-size: 4.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
 
 .status {
@@ -118,13 +99,6 @@ h2 {
   color: white;
 }
 
-.controls button:hover,
-.mode-btn:hover,
-.time-btn:hover,
-#set-custom-btn:hover {
-  opacity: 0.92;
-}
-
 .progress-wrap {
   width: 100%;
   height: 12px;
@@ -135,18 +109,32 @@ h2 {
 }
 
 .progress-bar {
-  width: 0%;
-  height: 100%;
   background: #2563eb;
   transition: width 0.3s ease;
 }
 
-body.break-mode {
-  background: #ecfeff;
+#task-list {
+  list-style: none;
+  padding: 0;
 }
 
-body.break-mode .mode-btn.active,
-body.break-mode .time-btn.active-time,
-body.break-mode .progress-bar {
-  background: #0f766e;
+#task-list li {
+  padding: 10px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+#task-list li.active-task {
+  border: 2px solid #2563eb;
+}
+
+#task-list li.completed-task {
+  text-decoration: line-through;
+  color: gray;
+}
+
+body.break-mode{
+    background: #fde2e2;
 }
