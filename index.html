@@ -18,6 +18,26 @@
           <button id="break-btn" class="mode-btn">Break</button>
         </div>
 
+        <div class="time-options" id="time-options"></div>
+
+        <div class="custom-time">
+            <label for="custom-minutes">Custom minutes</label>
+            <input id="custom-minutes" type="number" min="1" max="180" />
+            <button id="set-custom-btn">Set</button>
+        </div>
+
+        <div class="custom-time">
+          <label for="custom-minutes">Custom minutes</label>
+          <input
+            id="custom-minutes"
+            type="number"
+            min="1"
+            max="180"
+            placeholder="Enter minutes"
+          />
+          <button id="set-custom-btn">Set</button>
+        </div>
+
         <div class="timer" id="timer">25:00</div>
         <p class="status" id="status">Ready to focus?</p>
 
@@ -40,6 +60,6 @@
       </section>
     </main>
 
-    <script src="./index.js"></script>
+    <script src="./script.js"></script>
   </body>
 </html>

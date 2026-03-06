@@ -11,13 +11,13 @@ body {
 }
 
 .app {
-  width: min(90%, 700px);
+  width: min(92%, 720px);
   margin: 40px auto;
 }
 
 .card,
 .about {
-  background: lightblue;
+  background: #ffffff;
   border-radius: 16px;
   padding: 24px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
@@ -45,13 +45,24 @@ h2 {
   color: #4b5563;
 }
 
-.mode-switch {
+.mode-switch,
+.time-options,
+.custom-time,
+.controls {
   display: flex;
   gap: 12px;
-  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.mode-switch,
+.time-options,
+.custom-time {
+  margin: 16px 0;
 }
 
 .mode-btn,
+.time-btn,
+#set-custom-btn,
 .controls button {
   border: none;
   border-radius: 10px;
@@ -60,13 +71,30 @@ h2 {
   font-size: 1rem;
 }
 
-.mode-btn {
+.mode-btn,
+.time-btn {
   background: #e5e7eb;
+  color: #111827;
 }
 
-.mode-btn.active {
+.mode-btn.active,
+.time-btn.active-time {
   background: #2563eb;
   color: white;
+}
+
+#custom-minutes {
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  width: 150px;
+  font-size: 1rem;
+}
+
+.custom-time label {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
 }
 
 .timer {
@@ -82,10 +110,7 @@ h2 {
 }
 
 .controls {
-  display: flex;
   justify-content: center;
-  gap: 12px;
-  flex-wrap: wrap;
 }
 
 .controls button {
@@ -94,8 +119,10 @@ h2 {
 }
 
 .controls button:hover,
-.mode-btn:hover {
-  opacity: 0.9;
+.mode-btn:hover,
+.time-btn:hover,
+#set-custom-btn:hover {
+  opacity: 0.92;
 }
 
 .progress-wrap {
@@ -118,10 +145,8 @@ body.break-mode {
   background: #ecfeff;
 }
 
-body.break-mode .mode-btn.active {
-  background: #0f766e;
-}
-
+body.break-mode .mode-btn.active,
+body.break-mode .time-btn.active-time,
 body.break-mode .progress-bar {
   background: #0f766e;
 }
