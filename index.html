@@ -1,11 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="style.css" />
-    <title>My Personal Website</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tony's Pomodoro Timer</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Hello World!</h1>
-    <script src="script.js"></script>
+    <main class="app">
+      <section class="card">
+        <p class="eyebrow">Pomodoro Timer</p>
+        <h1>Stay focused</h1>
+        <p class="subtitle">A simple focus timer built with HTML, CSS, and JavaScript.</p>
+
+        <div class="mode-switch">
+          <button id="work-btn" class="mode-btn active">Work</button>
+          <button id="break-btn" class="mode-btn">Break</button>
+        </div>
+
+        <div class="timer" id="timer">25:00</div>
+        <p class="status" id="status">Ready to focus?</p>
+
+        <div class="controls">
+          <button id="start-btn">Start</button>
+          <button id="pause-btn">Pause</button>
+          <button id="reset-btn">Reset</button>
+        </div>
+
+        <div class="progress-wrap">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </section>
+
+      <section class="about">
+        <h2>About this project</h2>
+        <p>
+        This coursework reminded me back in college when I use pomodoro technique to help me stay focused and productive. I decided to build a simple pomodoro timer as a fun project to practice my HTML, CSS, and JavaScript skills. The timer allows users to switch between work and break modes, start/pause/reset the timer, and visually track their progress with a progress bar. It's a great way to stay on track and manage your time effectively!
+        </p>
+      </section>
+    </main>
+
+    <script src="./index.js"></script>
   </body>
 </html>
