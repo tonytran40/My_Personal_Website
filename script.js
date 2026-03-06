@@ -39,7 +39,14 @@ function formatTime(seconds) {
 function updateDisplay() {
   timerDisplay.textContent = formatTime(timeLeft);
   const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
-  progressBar.style.width = `${progressPercent}%`;
+  const circle = document.querySelector(".progress-ring-circle");
+const radius = 100;
+const circumference = 2 * Math.PI * radius;
+
+circle.style.strokeDasharray = circumference;
+
+const offset = circumference - (timeLeft / totalTime) * circumference;
+circle.style.strokeDashoffset = offset;
 }
 
 function setModeButtonState(mode) {
