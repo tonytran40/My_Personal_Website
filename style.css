@@ -3,7 +3,7 @@
 }
 
 :root {
-  --body-bg: #f4f7fb;
+  --body-bg: #f6f8fc;
   --body-text: #1f2937;
   --card-bg: #ffffff;
   --card-border: #e5e7eb;
@@ -146,7 +146,7 @@ body.dark-mode {
 
 .mode-btn.active,
 .time-btn.active-time {
-  background: #2563eb;
+  background: #3b82f6;
   color: white;
 }
 
@@ -216,7 +216,7 @@ body.dark-mode {
 }
 
 body.break-mode{
-    background: #fde2e2;
+    background: #fda1a1;
 }
 
 body.dark-mode.break-mode {
