@@ -7,13 +7,48 @@
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
+    <button id="theme-toggle" class="theme-toggle" type="button">Dark mode</button>
     <main class="app">
 
-     <section class="about">
+      <section class="about">
+        <p class="eyebrow">About</p>
         <h2>About this project</h2>
-        <p>
-        This coursework reminded me back in college when I use pomodoro technique to help me stay focused and productive. I decided to build a simple pomodoro timer as a fun project to practice my HTML, CSS, and JavaScript skills. The timer allows users to switch between work and break modes, start/pause/reset the timer, and visually track their progress with a progress bar. It's a great way to stay on track and manage your time effectively!
-        </p>
+<p class="about-content">
+  This project was inspired by the Pomodoro technique I used in college to stay focused and productive while studying. I built this timer as a way to practice my HTML, CSS, and JavaScript skills while creating something useful.
+</p>
+
+<p>
+----------------------------------------------------------------
+</p>
+
+<p class="about-content">
+  The application allows users to switch between work and break sessions, start/pause/reset the timer, and track progress with a circular progress indicator.
+</p>
+
+<p>
+----------------------------------------------------------------
+</p>
+
+<p class="about-content">
+  I also added features such as a task list, a Pomodoro session counter, a caffeine counter, and dark mode for a more comfortable viewing experience.
+</p>
+
+<p>
+----------------------------------------------------------------
+</p>
+
+<p class="about-content">
+  This project helped me practice DOM manipulation, event handling, and building interactive user interfaces in the browser.
+</p>
+        <h3 class="about-subtitle">What I learned and applied</h3>
+        <ul class="about-learned">
+          <li>Building page structure with HTML</li>
+          <li>Styling layouts with CSS</li>
+          <li>Using JavaScript variables, functions, and arrays</li>
+          <li>Manipulating the DOM to update the interface dynamically</li>
+          <li>Handling user interaction with event listeners</li>
+          <li>Using timers with setInterval for countdown functionality</li>
+        </ul>
       </section>
       <section class="card">
         <p class="eyebrow">Pomodoro Timer</p>
@@ -52,6 +87,10 @@
   <div class="timer-text" id="timer">25:00</div>
 </div>
         <p class="status" id="status">Ready to focus?</p>
+        <div class="pomodoro-counter">
+        <p>Pomodoros Completed 🍅</p>
+        <span id="pomodoro-count">0</span>
+        </div>
 
         <div class="controls">
           <button id="start-btn">Start</button>
@@ -76,9 +115,18 @@
         <ul id="task-list"></ul>
       </aside>
     </main>
-      
-      
-    </main>
+
+<div class="coffee-box">
+  <p class="coffee-title">Caffeine Counter</p>
+
+  <div class="coffee-progress">
+    <div id="coffee-progress-bar"></div>
+  </div>
+
+  <div id="coffee-display"></div>
+
+  <button id="coffee-btn">Add Coffee ☕</button>
+</div>
 
     <script src="./script.js"></script>
   </body>

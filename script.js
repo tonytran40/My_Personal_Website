@@ -1,5 +1,6 @@
 const WORK_PRESETS = [25, 45, 60];
 const BREAK_PRESETS = [5, 10, 15];
+const THEME_STORAGE_KEY = "preferred-theme";
 
 const timerDisplay = document.getElementById("timer");
 const statusText = document.getElementById("status");
@@ -20,6 +21,7 @@ const timeOptionsContainer = document.getElementById("time-options");
 const taskInput = document.getElementById("task-input");
 const addTaskBtn = document.getElementById("add-task-btn");
 const taskList = document.getElementById("task-list");
+const themeToggleBtn = document.getElementById("theme-toggle");
 
 let currentMode = "work";
 let totalTime = WORK_PRESETS[0] * 60;
@@ -28,6 +30,19 @@ let timerId = null;
 let currentTaskItem = null;
 let selectedWorkMinutes = WORK_PRESETS[0];
 let selectedBreakMinutes = BREAK_PRESETS[0];
+
+function applyTheme(theme) {
+  const isDarkMode = theme === "dark";
+  document.body.classList.toggle("dark-mode", isDarkMode);
+  themeToggleBtn.textContent = isDarkMode ? "Light mode" : "Dark mode";
+}
+
+function initializeTheme() {
+  const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+  const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const startingTheme = savedTheme || (prefersDarkMode ? "dark" : "light");
+  applyTheme(startingTheme);
+}
 
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
@@ -145,6 +160,8 @@ function selectNextAvailableTask() {
 
 function switchModeAfterFinish() {
   if (currentMode === "work") {
+    pomodoroCount++;
+    pomodoroDisplay.textContent = pomodoroCount;
     completeCurrentTask();
     selectNextAvailableTask();
     currentMode = "break";
@@ -224,7 +241,33 @@ function addTask() {
   if (!text) return;
 
   const li = document.createElement("li");
+  const taskText = document.createElement("span");
+  const deleteBtn = document.createElement("button");
+  taskText.textContent = text;
+  deleteBtn.textContent = "✕";
+  deleteBtn.className = "delete-task-btn";
+
+    taskText.addEventListener("click", () => {
+    if (li.classList.contains("completed-task")) return;
+
+    document.querySelectorAll("#task-list li").forEach((item) => {
+      item.classList.remove("active-task");
+    });
+
+    li.classList.add("active-task");
+    currentTaskItem = li;
+  });
+
+  deleteBtn.addEventListener("click", () => {
+    if (currentTaskItem === li) {
+      currentTaskItem = null;
+    }
+    li.remove();
+  });
   li.textContent = text;
+
+  li.appendChild(deleteBtn);
+  taskList.appendChild(li);
 
   li.addEventListener("click", () => {
     if (li.classList.contains("completed-task")) return;
@@ -290,6 +333,36 @@ breakBtn.addEventListener("click", () => {
   setMode("break");
 });
 
+themeToggleBtn.addEventListener("click", () => {
+  const isDarkMode = document.body.classList.contains("dark-mode");
+  const nextTheme = isDarkMode ? "light" : "dark";
+  localStorage.setItem(THEME_STORAGE_KEY, nextTheme);
+  applyTheme(nextTheme);
+});
+
+initializeTheme();
 renderTimeButtons("work");
 setModeButtonState("work");
 updateDisplay();
+
+let coffeeCount = 0;
+const maxCoffee = 8;
+
+const coffeeBtn = document.getElementById("coffee-btn");
+const coffeeDisplay = document.getElementById("coffee-display");
+const coffeeProgress = document.getElementById("coffee-progress-bar");
+coffeeBtn.addEventListener("click", () => {
+
+  coffeeCount++;
+
+  const coffee = document.createElement("span");
+  coffee.textContent = "☕";
+
+  coffeeDisplay.appendChild(coffee);
+
+  const percent = (coffeeCount / maxCoffee) * 100;
+  coffeeProgress.style.width = percent + "%";
+});
+
+let pomodoroCount = 0;
+const pomodoroDisplay = document.getElementById("pomodoro-count");
