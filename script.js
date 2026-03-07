@@ -31,12 +31,28 @@ let currentTaskItem = null;
 let selectedWorkMinutes = WORK_PRESETS[0];
 let selectedBreakMinutes = BREAK_PRESETS[0];
 
+// Plays an alaram when timer finish
+function playAlarm() {
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  const audioContext = new AudioCtx();
+  const oscillator = audioContext.createOscillator();
+
+  oscillator.type = "sine";
+  oscillator.frequency.value = 880;
+  oscillator.connect(audioContext.destination);
+  oscillator.start();
+  oscillator.stop(audioContext.currentTime + 0.35);
+  oscillator.onended = () => audioContext.close();
+}
+
+// Dark mode
 function applyTheme(theme) {
   const isDarkMode = theme === "dark";
   document.body.classList.toggle("dark-mode", isDarkMode);
   themeToggleBtn.textContent = isDarkMode ? "Light mode" : "Dark mode";
 }
 
+// Theme 
 function initializeTheme() {
   const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
   const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -44,6 +60,7 @@ function initializeTheme() {
   applyTheme(startingTheme);
 }
 
+// Seconds into minutes:seconds
 function formatTime(seconds) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = seconds % 60;
@@ -51,6 +68,7 @@ function formatTime(seconds) {
   return `${String(minutes).padStart(2, "0")}:${String(remainingSeconds).padStart(2, "0")}`;
 }
 
+// Timer and progress ring
 function updateDisplay() {
   timerDisplay.textContent = formatTime(timeLeft);
   const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
@@ -64,6 +82,7 @@ const offset = circumference - (timeLeft / totalTime) * circumference;
 circle.style.strokeDashoffset = offset;
 }
 
+// Highlight the selected button
 function setModeButtonState(mode) {
   if (mode === "work") {
     workBtn.classList.add("active");
@@ -74,6 +93,7 @@ function setModeButtonState(mode) {
   }
 }
 
+// Select the preset time
 function renderTimeButtons(mode) {
   timeOptionsContainer.innerHTML = "";
 
@@ -117,6 +137,7 @@ function renderTimeButtons(mode) {
   });
 }
 
+// Set the mode to either work or break
 function setMode(mode) {
   clearInterval(timerId);
   timerId = null;
@@ -138,6 +159,7 @@ function setMode(mode) {
   updateDisplay();
 }
 
+// Marks the currently active task as completed
 function completeCurrentTask() {
   if (currentTaskItem) {
     currentTaskItem.classList.remove("active-task");
@@ -146,6 +168,7 @@ function completeCurrentTask() {
   }
 }
 
+// When task is done, go to next
 function selectNextAvailableTask() {
   const nextTask = document.querySelector("#task-list li:not(.completed-task)");
   if (nextTask) {
@@ -158,6 +181,7 @@ function selectNextAvailableTask() {
   }
 }
 
+// When session ends, switch to either break or work mode 
 function switchModeAfterFinish() {
   if (currentMode === "work") {
     pomodoroCount++;
@@ -185,6 +209,7 @@ function switchModeAfterFinish() {
   startTimer();
 }
 
+// Countdown timer
 function startTimer() {
   if (timerId) return;
 
@@ -200,24 +225,30 @@ function startTimer() {
     if (timeLeft <= 0) {
       clearInterval(timerId);
       timerId = null;
+      playAlarm();
 
-      if (currentMode === "work") {
-        alert("Work session finished! Starting break.");
-      } else {
-        alert("Break finished! Starting work session.");
-      }
+      const message =
+        currentMode === "work"
+          ? "Work session finished! Starting break."
+          : "Break finished! Starting work session.";
+
+      setTimeout(() => {
+        alert(message);
+      }, 400);
 
       switchModeAfterFinish();
     }
   }, 1000);
 }
 
+// Pause timer
 function pauseTimer() {
   clearInterval(timerId);
   timerId = null;
   statusText.textContent = "Paused.";
 }
 
+// Reset timer 
 function resetTimer() {
   clearInterval(timerId);
   timerId = null;
@@ -235,6 +266,7 @@ function resetTimer() {
   updateDisplay();
 }
 
+// Add new task to list
 function addTask() {
   const text = taskInput.value.trim();
 
@@ -344,7 +376,7 @@ initializeTheme();
 renderTimeButtons("work");
 setModeButtonState("work");
 updateDisplay();
-
+//Coffee counter
 let coffeeCount = 0;
 const maxCoffee = 8;
 
