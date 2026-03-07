@@ -215,6 +215,18 @@ body.dark-mode {
   color: gray;
 }
 
+.lofi-section {
+  margin-top: 16px;
+}
+
+.lofi-player {
+  width: 100%;
+  height: 180px;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  background: var(--surface-bg);
+}
+
 body.break-mode{
     background: #fda1a1;
 }
